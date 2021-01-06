@@ -10,7 +10,9 @@
     "packages": [
       "shell",
       "lol",
-      "tft"
+      "tft",
+      "utils",
+      "design-system"
     ]
   },
   "devDependencies": {

@@ -1,0 +1,12 @@
+{
+  "name": "utils",
+  "version": "0.0.0",
+  "main": "./store.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.12.12"
+  },
+  "dependencies": {
+    "mobx-react": "^7.0.5"
+  }
+}

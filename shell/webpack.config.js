@@ -10,6 +10,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "dist"),
     port: 3000,
+    historyApiFallback: true,
   },
   output: {
     publicPath: "auto",
@@ -21,7 +22,8 @@ module.exports = {
         loader: "babel-loader",
         exclude: /node_modules/,
         options: {
-          presets: ["@babel/preset-react"],
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-class-properties"],
         },
       },
     ],
@@ -36,6 +38,7 @@ module.exports = {
       },
       exposes: {
         "./routes": "./src/routes",
+        "./store": "./src/store",
       },
       shared: {
         ...deps,
@@ -48,6 +51,11 @@ module.exports = {
           eager: true,
           singleton: true,
           requiredVersion: deps["react-dom"],
+        },
+        utils: {
+          eager: false,
+          singleton: true,
+          requiredVersion: deps["utils"],
         },
       },
     }),

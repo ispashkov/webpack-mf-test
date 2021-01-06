@@ -1,17 +1,25 @@
 import React from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "mobx-react";
 
 import Navigation from "./Navigation";
 
 import localRoutes from "./routes";
+import ShellStore from "./store";
 import lolRoutes from "lol/routes";
 import tftRoutes from "tft/routes";
+import LolStore from "lol/store";
+
+const stores = {
+  shellStore: new ShellStore(),
+  lolStore: new LolStore(),
+};
 
 const routes = [...localRoutes, ...lolRoutes, ...tftRoutes];
 
 const App = () => (
-  <HashRouter>
-    <div>
+  <Provider {...stores}>
+    <BrowserRouter>
       <Navigation />
       <React.Suspense fallback={<div>Loading...</div>}>
         <Switch>
@@ -25,8 +33,8 @@ const App = () => (
           ))}
         </Switch>
       </React.Suspense>
-    </div>
-  </HashRouter>
+    </BrowserRouter>
+  </Provider>
 );
 
 export default App;
