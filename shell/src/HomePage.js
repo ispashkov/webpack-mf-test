@@ -1,6 +1,8 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
+import { useLolStore } from "lol/store";
+import { useShellStore } from "./store";
 import { Counter, List } from "design-system";
-import { inject, observer } from "mobx-react";
 
 const style = {
   height: 400,
@@ -9,36 +11,35 @@ const style = {
   padding: 12,
 };
 
-const HomePage = inject((stores) => stores)(
-  observer((props) => {
-    const { shellStore, lolStore } = props;
+const HomePage = observer(() => {
+  const shellStore = useShellStore();
+  const lolStore = useLolStore();
 
-    return (
-      <div style={style}>
-        <h1>Home Page</h1>
-        <h2>Welcome to the App Shell!</h2>
-        <p>
-          <em>a page being provided by App Shell</em>
-        </p>
+  return (
+    <div style={style}>
+      <h1>Home Page</h1>
+      <h2>Welcome to the App Shell!</h2>
+      <p>
+        <em>a page being provided by App Shell</em>
+      </p>
 
-        <div>LOL Store</div>
-        <Counter
-          value={lolStore.counter}
-          onIncrement={lolStore.increment}
-          onDecrement={lolStore.decrement}
-        />
+      <div>LOL Store</div>
+      <Counter
+        value={lolStore.counter}
+        onIncrement={lolStore.increment}
+        onDecrement={lolStore.decrement}
+      />
 
-        <hr />
+      <hr />
 
-        <div>Shell Store</div>
-        <List
-          items={shellStore.numbers}
-          onPush={shellStore.push}
-          onPop={shellStore.pop}
-        />
-      </div>
-    );
-  })
-);
+      <div>Shell Store</div>
+      <List
+        items={shellStore.numbers}
+        onPush={shellStore.push}
+        onPop={shellStore.pop}
+      />
+    </div>
+  );
+});
 
 export default HomePage;
