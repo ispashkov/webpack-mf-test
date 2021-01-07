@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Navigation from "./Navigation";
 
@@ -14,7 +14,7 @@ const routes = [...localRoutes, ...lolRoutes, ...tftRoutes];
 const App = () => (
   <ShellProvider>
     <LolProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Navigation />
         <React.Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -28,7 +28,7 @@ const App = () => (
             ))}
           </Switch>
         </React.Suspense>
-      </HashRouter>
+      </BrowserRouter>
     </LolProvider>
   </ShellProvider>
 );

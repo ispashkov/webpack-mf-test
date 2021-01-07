@@ -1,4 +1,4 @@
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import React from "react";
 import routes from "./routes";
@@ -8,7 +8,7 @@ import { ShellProvider } from "shell/store";
 const App = () => (
   <ShellProvider>
     <LolProvider>
-      <HashRouter>
+      <BrowserRouter>
         <div>
           <React.Suspense fallback={<div>Loading...</div>}>
             <Switch>
@@ -23,7 +23,7 @@ const App = () => (
             </Switch>
           </React.Suspense>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </LolProvider>
   </ShellProvider>
 );

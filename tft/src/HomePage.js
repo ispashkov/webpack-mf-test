@@ -7,13 +7,15 @@ const style = {
   padding: 12,
 };
 
-const HomePage = () => (
-  <div style={style}>
-    <h1>TFT Page</h1>
-    <p>
-      <em>a page being provided by TFT</em>
-    </p>
-  </div>
-);
+const HomePage = () => {
+  return (
+    <div style={style}>
+      <h1>TFT Page</h1>
+      <p>
+        <em>a page being provided by TFT</em>
+      </p>
+    </div>
+  );
+};
 
 export default HomePage;

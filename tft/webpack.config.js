@@ -32,6 +32,9 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "tft",
       filename: "remoteEntry.js",
+      remotes: {
+        shell: "shell@http://localhost:3000/remoteEntry.js",
+      },
       exposes: {
         "./routes": "./src/routes",
       },
