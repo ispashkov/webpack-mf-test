@@ -1,66 +1,36 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ModuleFederationPlugin = require("webpack").container
-  .ModuleFederationPlugin;
-const path = require("path");
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const deps = require("./package.json").dependencies;
+const webpackConfig = require("../config/webpack.config");
 
-module.exports = {
-  entry: "./src/index",
-  mode: "development",
-  devServer: {
-    contentBase: path.join(__dirname, "dist"),
-    port: 3000,
-    historyApiFallback: true,
-  },
-  output: {
-    publicPath: "auto",
-  },
-  module: {
-    rules: [
-      {
-        test: /\.jsx?$/,
-        loader: "babel-loader",
-        exclude: /node_modules/,
-        options: {
-          presets: ["@babel/preset-env", "@babel/preset-react"],
-          plugins: ["@babel/plugin-proposal-class-properties"],
-        },
+module.exports = webpackConfig(3000, [
+  new ModuleFederationPlugin({
+    name: "shell",
+    filename: "remoteEntry.js",
+    remotes: {
+      lol: "lol@http://localhost:3001/remoteEntry.js",
+      tft: "tft@http://localhost:3002/remoteEntry.js",
+    },
+    exposes: {
+      "./routes": "./src/routing/routes",
+      "./store": "./src/store/store",
+    },
+    shared: {
+      ...deps,
+      react: {
+        eager: true,
+        singleton: true,
+        requiredVersion: deps.react,
       },
-    ],
-  },
-  plugins: [
-    new ModuleFederationPlugin({
-      name: "shell",
-      filename: "remoteEntry.js",
-      remotes: {
-        lol: "lol@http://localhost:3001/remoteEntry.js",
-        tft: "tft@http://localhost:3002/remoteEntry.js",
+      "react-dom": {
+        eager: true,
+        singleton: true,
+        requiredVersion: deps["react-dom"],
       },
-      exposes: {
-        "./routes": "./src/routes",
-        "./store": "./src/store",
+      utils: {
+        eager: false,
+        singleton: true,
+        requiredVersion: deps["utils"],
       },
-      shared: {
-        ...deps,
-        react: {
-          eager: true,
-          singleton: true,
-          requiredVersion: deps.react,
-        },
-        "react-dom": {
-          eager: true,
-          singleton: true,
-          requiredVersion: deps["react-dom"],
-        },
-        utils: {
-          eager: false,
-          singleton: true,
-          requiredVersion: deps["utils"],
-        },
-      },
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
-    }),
-  ],
-};
+    },
+  }),
+]);

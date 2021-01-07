@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import React from "react";
-import routes from "./routes";
+import routes from "./routing/routes";
 import { ShellProvider } from "shell/store";
 
 const App = () => (

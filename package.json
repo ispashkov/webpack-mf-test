@@ -12,7 +12,8 @@
       "lol",
       "tft",
       "utils",
-      "design-system"
+      "design-system",
+      "config"
     ]
   },
   "devDependencies": {

@@ -1,12 +1,12 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { useLolStore } from "lol/store";
-import { useShellStore } from "./store";
+import { useLolStore } from "../store/store";
+import { useShellStore } from "shell/store";
 import { Counter, List } from "design-system";
 
 const style = {
   height: 400,
-  backgroundColor: "#673ab7",
+  backgroundColor: "#254527",
   color: "white",
   padding: 12,
 };
@@ -17,10 +17,10 @@ const HomePage = observer(() => {
 
   return (
     <div style={style}>
-      <h1>Home Page</h1>
-      <h2>Welcome to the App Shell!</h2>
+      <h1>LoL Page</h1>
+      <h2>Welcome to the LoL!</h2>
       <p>
-        <em>a page being provided by App Shell</em>
+        <em>a page being provided by LoL</em>
       </p>
 
       <div>LOL Store</div>
@@ -29,8 +29,6 @@ const HomePage = observer(() => {
         onIncrement={lolStore.increment}
         onDecrement={lolStore.decrement}
       />
-
-      <hr />
 
       <div>Shell Store</div>
       <List

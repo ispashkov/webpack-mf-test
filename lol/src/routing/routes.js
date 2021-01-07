@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePage = React.lazy(() => import("./HomePage"));
+const HomePage = React.lazy(() => import("../pages/HomePage"));
 
 const routes = [
   {

@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-import Navigation from "./Navigation";
+import Navigation from "./components/Navigation";
 
-import localRoutes from "./routes";
-import { ShellProvider } from "./store";
+import localRoutes from "./routing/routes";
+import { ShellProvider } from "./store/store";
 import lolRoutes from "lol/routes";
 import tftRoutes from "tft/routes";
 import { LolProvider } from "lol/store";
