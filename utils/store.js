@@ -4,14 +4,8 @@ import { useLocalStore } from "mobx-react-lite";
 export const getProviderAndHook = (createStoreFn) => {
   const StoreContext = React.createContext(null);
 
-  const Provider = (props) => {
-    const { children } = props;
-
-    const existedStore = React.useContext(StoreContext);
-    console.log(existedStore);
-
+  const Provider = ({ children }) => {
     const createStore = React.useCallback(createStoreFn, []);
-
     const store = useLocalStore(createStore);
 
     return (
